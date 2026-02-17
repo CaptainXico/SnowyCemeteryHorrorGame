@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Set tree model attributes with specific height
     tree.setAttribute("gltf-model", "#gravemodel");
     tree.setAttribute("position", `${x} ${treeHeight} ${z}`);
-    tree.setAttribute("scale", "2 2 2");
+    tree.setAttribute("scale", "0.2 0.2 0.2");
 
     scene.appendChild(tree);
   }
