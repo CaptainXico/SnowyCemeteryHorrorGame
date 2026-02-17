@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     santaModel.setAttribute("gltf-model", "#rat");
 
-    santaModel.setAttribute("scale", "0.01 0.01 0.01");
+    santaModel.setAttribute("scale", "0.1 0.1 0.1");
 
     // 🔥 THIS fixes belly-up problem
     // Try this first:
