@@ -1,5 +1,4 @@
 // popup.js
-// Horror rat popup with guaranteed jumpscare sound
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -65,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const ratModel = document.createElement("a-entity");
 
     ratModel.setAttribute("gltf-model", "#rat");
-    ratModel.setAttribute("scale", "0.5 0.5 0.5");
+    ratModel.setAttribute("scale", "0.1 0.1 0.1");
 
     // ✅ You said correct orientation was 0 0 0
     ratModel.setAttribute("rotation", "0 0 0");
@@ -86,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ monstro aparece corretamente!");
 
     // =========================
-    // 🔊 JUMPSCARE SOUND FIX
+    // 🔊 JUMPSCARE
     // =========================
 
     setTimeout(() => {
