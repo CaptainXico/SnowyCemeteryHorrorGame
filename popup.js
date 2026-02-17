@@ -73,6 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("✅ monstro aparece corretamente!");
 
-  }, 5000);
+  }, 20000);
 
 });
