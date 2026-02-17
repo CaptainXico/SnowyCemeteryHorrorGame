@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Define the camera's initial position as the center
   const cameraPosition = { x: 0, y: 0, z: 0 };
   const radius = 45; // Radius around the camera to spread the entities
-  const treeHeight = 1; // Set specific height for trees
+  const treeHeight = 1.8; // Set specific height for trees
 
   for (let i = 0; i < 20; i++) {
     const tree = document.createElement("a-entity");
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Set tree model attributes with specific height
     tree.setAttribute("gltf-model", "#gravemodel");
     tree.setAttribute("position", `${x} ${treeHeight} ${z}`);
-    tree.setAttribute("scale", "1 1 1");
+    tree.setAttribute("scale", "0.5 0.5 0.5");
 
     scene.appendChild(tree);
   }
