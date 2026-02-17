@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const z = cameraPosition.z + distance * Math.sin(angle);
 
     // Set tree model attributes with specific height
-    tree.setAttribute("gltf-model", "#treemodel");
+    tree.setAttribute("gltf-model", "#gravemodel");
     tree.setAttribute("position", `${x} ${treeHeight} ${z}`);
     tree.setAttribute("scale", "2 2 2");
 
