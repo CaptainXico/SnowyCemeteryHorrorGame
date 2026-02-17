@@ -1,64 +1,61 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello, WebVR! - A-Frame</title>
-    <meta name="description" content="Hello, WebVR! - A-Frame" />
+    <title>christmas forest</title>
+    <meta name="description" content="lookout!" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
-    <script src="treeGeneration.js"></script> <!-- Link to tree generation script -->
+    <script src="graveGeneration.js"></script> <!-- Link to tree generation script -->
     <script src="snowGeneration.js"></script> <!-- Link to snow generation script -->
     <script src="popup.js"></script> <!-- Link to popup script -->
-    <script src="movement.js"></script> <!-- Movement script -->
+    <script src="movement.js"></script> <!-- link to Movement script -->
+    <script src="ratmove.js"></script> <!-- link to Santa movement animation -->
   </head>
   <body>
-    <a-scene fog="type: linear; color: #000000; near: 1; far: 20">
+    <a-scene fog="type: linear; color: #FFFFFF; near: 1; far: 20">
+      
       <a-assets>
         <a-asset-item
-          id="treemodel"
-          src="https://cdn.glitch.global/3fd7764d-39b2-49bd-baec-e5ce622e220f/gothic_tombstone.glb?v=1731233766051"
+          id="gravemodel"
+          src="rat.glb"
         ></a-asset-item>
         
         <a-asset-item
           id="snowmodel"
-          src="https://cdn.glitch.global/2392092b-a3aa-4a16-8417-e249fd35b325/snow_on_the_ground.glb"
+          src="snow_pile.glb"
         ></a-asset-item>
         
         <a-asset-item
-          id="zombie"
-          src="https://cdn.glitch.global/3fd7764d-39b2-49bd-baec-e5ce622e220f/scary_zombie_pack.glb?v=1731246273236"
+          id="rat"
+          src="rat.glb"
         ></a-asset-item>
-
-        <audio
-          id="background-music"
-          src="https://cdn.glitch.global/5aaca36c-3016-4c30-9323-cbd238bd06b9/horror-background-tension-254885.mp3?v=1737761890518"
-        ></audio>
+        
       </a-assets>
-
+      
       <a-sky color="#ECECEC"></a-sky>
 
       <!-- Snowy ground plane -->
-      <a-plane
-        position="0 0 -10"
-        rotation="-90 0 0"
-        width="100"
-        height="100"
-        color="#FFFFFF"
+      <a-plane 
+        position="0 0 -10" 
+        rotation="-90 0 0" 
+        width="100" 
+        height="100" 
+        color="#FFFFFF" 
         material="opacity: 0.9; roughness: 1"
       ></a-plane>
 
       <!-- Moving fog with white color -->
-      <a-box
+      <a-box 
         id="movingFog"
-        position="0 1 -5"
-        depth="20"
-        height="5"
-        width="20"
-        color="#FFFFFF"
+        position="0 1 -5" 
+        depth="20" 
+        height="5" 
+        width="20" 
+        color="#FFFFFF" 
         opacity="0.1"
         animation="property: position; from: -10 1 -5; to: 10 1 -5; loop: true; dur: 20000; easing: linear;"
       ></a-box>
 
-      <!-- Camera rig with controllers as children -->
+            <!-- Camera rig with controllers as children -->
       <a-entity id="camera-rig">
         <a-camera id="camera" position="0 1.6 0"></a-camera>
 
@@ -83,4 +80,3 @@
     </a-scene>
   </body>
 </html>
-
