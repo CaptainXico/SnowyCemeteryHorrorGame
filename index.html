@@ -14,6 +14,8 @@
     <a-scene fog="type: linear; color: #343434; near: 1; far: 20">
       
       <a-assets>
+        <audio id="ambient-sound" src="backsound.mp3" preload="auto"></audio>
+        
         <a-asset-item
           id="gravemodel"
           src="gravestone.glb"
@@ -32,6 +34,14 @@
       </a-assets>
       
       <a-sky color="#000000"></a-sky>
+
+      <a-entity
+        sound="src: #ambient-sound;
+         autoplay: true;
+         loop: true;
+         volume: 0.5;
+         positional: false">
+      </a-entity>
 
       <!-- Snowy ground plane -->
       <a-plane 
