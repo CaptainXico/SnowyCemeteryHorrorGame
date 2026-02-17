@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     forward.y = 0;
     forward.normalize();
 
-    const distance = 2.5;
+    const distance = 3;
 
     const ratPos = {
       x: cameraPos.x + forward.x * distance,
