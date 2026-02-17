@@ -1,4 +1,9 @@
+// popup.js
+// Horror rat popup with guaranteed jumpscare sound
+
 document.addEventListener("DOMContentLoaded", function () {
+
+  const popupDelay = 15000; // ⏳ change this to increase delay (ms)
 
   setTimeout(() => {
 
@@ -6,73 +11,115 @@ document.addEventListener("DOMContentLoaded", function () {
     const camera = document.querySelector("[camera]");
 
     if (!scene || !camera) {
-      console.error("❌ Cena ou câmera não encontrada.");
+      console.error("❌ Scene or camera not found.");
       return;
     }
 
-    console.log("Criando monstro...");
+    console.log("👁️ Criando monstro...");
 
-    // Update camera world matrix
+    // Update world matrix
     camera.object3D.updateMatrixWorld(true);
 
-    // Camera world position
+    // Get camera world position
     const cameraPos = new THREE.Vector3();
     camera.object3D.getWorldPosition(cameraPos);
 
-    // Camera forward direction
+    // Get forward direction
     const forward = new THREE.Vector3();
     camera.object3D.getWorldDirection(forward);
 
-    // Invert so it's in front
+    // Invert (A-Frame forward correction)
     forward.multiplyScalar(-1);
 
     // Remove vertical tilt
     forward.y = 0;
     forward.normalize();
 
-    const distance = 3;
+    const distance = 2.5;
 
-    const santaPos = {
+    const ratPos = {
       x: cameraPos.x + forward.x * distance,
       y: 0,
       z: cameraPos.z + forward.z * distance
     };
 
-    console.log("📍 rat position:", santaPos);
+    console.log("📍 rat position:", ratPos);
 
-    // ✅ CONTAINER (controls position and facing)
-    const santaContainer = document.createElement("a-entity");
+    // =========================
+    // CONTAINER (controls facing)
+    // =========================
 
-    santaContainer.setAttribute("position",
-      `${santaPos.x} ${santaPos.y} ${santaPos.z}`);
+    const ratContainer = document.createElement("a-entity");
 
-    santaContainer.setAttribute("id", "santa-popup");
+    ratContainer.setAttribute("position",
+      `${ratPos.x} ${ratPos.y} ${ratPos.z}`);
 
-    scene.appendChild(santaContainer);
+    ratContainer.setAttribute("id", "rat-popup");
 
-    // ✅ MODEL (controls only model orientation)
-    const santaModel = document.createElement("a-entity");
+    scene.appendChild(ratContainer);
 
-    santaModel.setAttribute("gltf-model", "#rat");
+    // =========================
+    // MODEL (controls model orientation)
+    // =========================
 
-    santaModel.setAttribute("scale", "0.1 0.1 0.1");
+    const ratModel = document.createElement("a-entity");
 
-    // 🔥 THIS fixes belly-up problem
-    // Try this first:
-    santaModel.setAttribute("rotation", "0 0 0");
+    ratModel.setAttribute("gltf-model", "#rat");
+    ratModel.setAttribute("scale", "0.5 0.5 0.5");
 
-    santaContainer.appendChild(santaModel);
+    // ✅ You said correct orientation was 0 0 0
+    ratModel.setAttribute("rotation", "0 0 0");
 
-    // Make container face camera (only Y axis)
-    const dx = cameraPos.x - santaPos.x;
-    const dz = cameraPos.z - santaPos.z;
+    ratContainer.appendChild(ratModel);
+
+    // =========================
+    // Face player (Y only)
+    // =========================
+
+    const dx = cameraPos.x - ratPos.x;
+    const dz = cameraPos.z - ratPos.z;
 
     const angleY = Math.atan2(dx, dz) * (180 / Math.PI);
 
-    santaContainer.setAttribute("rotation", `0 ${angleY} 0`);
+    ratContainer.setAttribute("rotation", `0 ${angleY} 0`);
 
     console.log("✅ monstro aparece corretamente!");
 
-  }, 20000);
+    // =========================
+    // 🔊 JUMPSCARE SOUND FIX
+    // =========================
+
+    setTimeout(() => {
+
+      const jumpscareAudio = document.querySelector("#jumpscare-audio");
+
+      if (!jumpscareAudio || !jumpscareAudio.components.sound) {
+        console.warn("⚠️ Jumpscare audio not found.");
+        return;
+      }
+
+      const soundComponent = jumpscareAudio.components.sound;
+
+      // If already loaded → play
+      if (soundComponent.loaded) {
+
+        soundComponent.playSound();
+        console.log("🔊 Jumpscare played");
+
+      } else {
+
+        // Wait until loaded
+        jumpscareAudio.addEventListener("sound-loaded", () => {
+
+          soundComponent.playSound();
+          console.log("🔊 Jumpscare played (after load)");
+
+        }, { once: true });
+
+      }
+
+    }, 300); // small delay ensures audio context + loading ready
+
+  }, popupDelay);
 
 });
